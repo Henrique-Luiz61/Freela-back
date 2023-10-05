@@ -11,7 +11,7 @@ import {
 const serviceRouter = Router();
 
 serviceRouter.post(
-  "/addService",
+  "/addServices",
   validateAuth,
   validateSchema(addServiceSchema),
   createService

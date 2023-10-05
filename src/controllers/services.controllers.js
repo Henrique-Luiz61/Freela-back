@@ -11,8 +11,9 @@ export async function createService(req, res) {
 
   try {
     const user = await getUserByIdDB(userId);
+
     if (user.rowCount === 0)
-      return res.status(404).send({ message: "Usuário não encontrado!" });
+      return res.status(404).send({ message: "User not found!" });
 
     await createServiceDB(title, description, photo, userId);
 
