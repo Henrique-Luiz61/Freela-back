@@ -62,7 +62,8 @@ ALTER SEQUENCE public."contactInfo_id_seq" OWNED BY public."contactInfo".id;
 CREATE TABLE public.professions (
     id integer NOT NULL,
     title text NOT NULL,
-    "userId" integer NOT NULL
+    "userId" integer NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now()
 );
 
 
@@ -236,8 +237,8 @@ INSERT INTO public."contactInfo" VALUES (8, '12345678900', '32999842400', 'Lavra
 -- Data for Name: professions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.professions VALUES (1, 'Dev', 14);
-INSERT INTO public.professions VALUES (2, 'Software engineer', 15);
+INSERT INTO public.professions VALUES (1, 'Dev', 14, '2023-10-06 15:20:48.803877');
+INSERT INTO public.professions VALUES (2, 'Software engineer', 15, '2023-10-06 15:20:48.803877');
 
 
 --

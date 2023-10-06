@@ -6,6 +6,7 @@ import {
   createService,
   getFreelancers,
   getServicesByUserId,
+  getTrueServicesByUserId,
 } from "../controllers/services.controllers.js";
 
 const serviceRouter = Router();
@@ -19,5 +20,6 @@ serviceRouter.post(
 serviceRouter.get("/myServices");
 serviceRouter.get("/home", getFreelancers);
 serviceRouter.get("/services/:id", getServicesByUserId);
+serviceRouter.get("/services/available/:id", getTrueServicesByUserId);
 
 export default serviceRouter;

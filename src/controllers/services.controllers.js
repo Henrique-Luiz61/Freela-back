@@ -1,6 +1,7 @@
 import { findUserByIdDB } from "../repository/users.repository.js";
 import {
   createServiceDB,
+  findTrueServicesByIdDB,
   findFreelancersDB,
   findServicesByUserIdDB,
 } from "../repository/services.repository.js";
@@ -54,5 +55,25 @@ export async function getServicesByUserId(req, res) {
     res.status(200).send(services.rows);
   } catch (err) {
     res.status(500).send(err.message);
+  }
+}
+
+export async function getTrueServicesByUserId(req, res) {
+  const { id } = req.params;
+
+  try {
+    const user = await findUserByIdDB(id);
+
+    if (user.rowCount === 0)
+      return res.status(404).send({ message: "User not found!" });
+
+    const availableServices = await findTrueServicesByIdDB(id);
+
+    if (availableServices.rowCount === 0)
+      return res.status(404).send({ message: "No services registered yet!" });
+
+    res.status(200).send(availableServices.rows);
+  } catch (err) {
+    res.status(200).send(err.message);
   }
 }

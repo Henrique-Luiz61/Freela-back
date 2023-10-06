@@ -24,3 +24,10 @@ export async function findServicesByUserIdDB(id) {
     [id]
   );
 }
+
+export async function findTrueServicesByIdDB(id) {
+  return db.query(
+    `SELECT id, title, description, photo, available FROM services WHERE "userId" = $1 AND available = $2;`,
+    [id, true]
+  );
+}
