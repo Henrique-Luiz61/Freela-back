@@ -5,10 +5,12 @@ import {
   getUserByEmailDB,
   createUserDB,
   createContactInfoDB,
+  createProfessionDB,
 } from "../repository/users.repository.js";
 
 export async function signUp(req, res) {
-  const { name, email, cpf, telephone, city, photo, password } = req.body;
+  const { name, email, cpf, telephone, city, photo, profession, password } =
+    req.body;
 
   try {
     const user = await getUserByEmailDB(email);
@@ -22,7 +24,11 @@ export async function signUp(req, res) {
 
     const userId = await getUserByEmailDB(email);
 
-    await createContactInfoDB(cpf, telephone, city, photo, userId.rows[0].id);
+    const id = userId.rows[0].id;
+
+    await createContactInfoDB(cpf, telephone, city, photo, id);
+
+    await createProfessionDB(profession, id);
 
     res.sendStatus(201);
   } catch (err) {

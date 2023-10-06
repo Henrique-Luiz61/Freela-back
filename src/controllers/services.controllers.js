@@ -1,9 +1,7 @@
 import { getUserByIdDB } from "../repository/users.repository.js";
 import {
   createServiceDB,
-  getFreelaNamePhotoDB,
-  getServicesDB,
-  getServicesByIdDB,
+  findFreelancersDB,
 } from "../repository/services.repository.js";
 
 export async function createService(req, res) {
@@ -23,19 +21,16 @@ export async function createService(req, res) {
   }
 }
 
-export async function getFreelaServices(req, res) {
+export async function getFreelancers(req, res) {
   try {
-    const freelaServices = await getFreelaNamePhotoDB();
+    const freelas = await findFreelancersDB();
 
-    const allServices = await getServicesDB();
+    if (freelas.rowCount === 0)
+      return res
+        .status(404)
+        .send({ message: "No freelancers registered yet!" });
 
-    for (let i = 0; i < freelaServices.rows.length; i++) {
-      freelaServices.rows[i].services = allServices.rows.filter((serv) => {
-        if (freelaServices.rows[i].id == serv.userId) return serv;
-      });
-    }
-
-    res.send(freelaServices.rows);
+    res.status(200).send(freelas.rows);
   } catch (err) {
     res.status(500).send(err.message);
   }

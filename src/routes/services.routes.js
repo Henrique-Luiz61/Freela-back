@@ -4,7 +4,7 @@ import { validateAuth } from "../middlewares/validateAuth.js";
 import { addServiceSchema } from "../schemas/services.schemas.js";
 import {
   createService,
-  getFreelaServices,
+  getFreelancers,
   getServicesByUserId,
 } from "../controllers/services.controllers.js";
 
@@ -17,7 +17,7 @@ serviceRouter.post(
   createService
 );
 serviceRouter.get("/myServices");
-serviceRouter.get("/home", getFreelaServices);
+serviceRouter.get("/home", getFreelancers);
 serviceRouter.get("/services/:userId", getServicesByUserId);
 
 export default serviceRouter;

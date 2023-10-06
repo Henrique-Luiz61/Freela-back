@@ -21,3 +21,10 @@ export async function createContactInfoDB(cpf, telephone, city, photo, userId) {
     [cpf, telephone, city, photo, Number(userId)]
   );
 }
+
+export async function createProfessionDB(profession, userId) {
+  return db.query(
+    `INSERT INTO professions (title, "userId") VALUES ($1, $2);`,
+    [profession, userId]
+  );
+}
