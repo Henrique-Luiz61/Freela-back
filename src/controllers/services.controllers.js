@@ -1,7 +1,8 @@
-import { getUserByIdDB } from "../repository/users.repository.js";
+import { findUserByIdDB } from "../repository/users.repository.js";
 import {
   createServiceDB,
   findFreelancersDB,
+  findServicesByUserIdDB,
 } from "../repository/services.repository.js";
 
 export async function createService(req, res) {
@@ -37,12 +38,20 @@ export async function getFreelancers(req, res) {
 }
 
 export async function getServicesByUserId(req, res) {
-  const { userId } = req.params;
+  const { id } = req.params;
 
   try {
-    const services = await getServicesByIdDB(Number(userId));
+    const user = await findUserByIdDB(id);
 
-    res.send(services.rows);
+    if (user.rowCount === 0)
+      return res.status(404).send({ message: "User not found!" });
+
+    const services = await findServicesByUserIdDB(id);
+
+    if (services.rowCount === 0)
+      return res.status(404).send({ message: "No services registered yet!" });
+
+    res.status(200).send(services.rows);
   } catch (err) {
     res.status(500).send(err.message);
   }

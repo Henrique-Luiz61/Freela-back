@@ -17,3 +17,10 @@ export async function findFreelancersDB() {
     ORDER BY users.id DESC;
   `);
 }
+
+export async function findServicesByUserIdDB(id) {
+  return db.query(
+    `SELECT id, title, description, photo, available FROM services WHERE "userId" = $1;`,
+    [id]
+  );
+}

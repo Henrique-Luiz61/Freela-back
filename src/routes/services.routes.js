@@ -18,6 +18,6 @@ serviceRouter.post(
 );
 serviceRouter.get("/myServices");
 serviceRouter.get("/home", getFreelancers);
-serviceRouter.get("/services/:userId", getServicesByUserId);
+serviceRouter.get("/services/:id", getServicesByUserId);
 
 export default serviceRouter;

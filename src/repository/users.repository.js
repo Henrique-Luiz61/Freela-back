@@ -11,7 +11,7 @@ export async function createUserDB(name, email, password) {
   );
 }
 
-export async function getUserByIdDB(userId) {
+export async function findUserByIdDB(userId) {
   return db.query(`SELECT * FROM users WHERE id = $1;`, [userId]);
 }
 
