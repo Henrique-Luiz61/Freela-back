@@ -9,7 +9,7 @@ export async function createServiceDB(title, description, photo, userId) {
 
 export async function findFreelancersDB() {
   return db.query(`
-    SELECT users.name, users.email, professions.title AS profession,
+    SELECT users.id, users.name, users.email, professions.title AS profession,
             "contactInfo".telephone, "contactInfo".city, "contactInfo".photo
 	  FROM users
 	  JOIN professions ON professions."userId" = users.id

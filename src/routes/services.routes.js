@@ -17,7 +17,6 @@ serviceRouter.post(
   validateSchema(addServiceSchema),
   createService
 );
-serviceRouter.get("/myServices");
 serviceRouter.get("/home", getFreelancers);
 serviceRouter.get("/services/:id", getServicesByUserId);
 serviceRouter.get("/services/available/:id", getTrueServicesByUserId);
